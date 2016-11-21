@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Temperature Converter</title>
+<link rel="icon" href="thermicon.jpg"></link>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+<script>
+function color(){
+var i = 0;
+i++;
+var randomColor = Math.floor(Math.random()*16777215);
+console.log(i);
+document.getElementById("body").style.backgroundColor = "#"+randomColor.toString(16);
+//document.getElementById("body").style.color = "#"+("0xFFFFFF"-("0x"+(randomColor.toString(16)))).toString(16);
+//console.log("0xFFFFFF"-("0x"+(randomColor.toString(16))));
+document.getElementById("body").style.transition = "all 5s";
+setTimeout(color, 10000);
+};
+
+function tempCtrl($scope){
+$scope.celsius = 0;
+$scope.fahrenheit = 32;
+$scope.fahrenheitConverter = function(){
+$scope.fahrenheit = ($scope.celsius * (9/5))+32;
+}
+$scope.celsiusConverter = function(){
+$scope.celsius = ($scope.fahrenheit - 32)*(5/9);
+}
+
+
+}
+
+
+</script>
+<style>
+body{
+font-family:Sans-serif, Optima;
+font-size: 20px;
+color: white;
+}
+#content{
+background-color: inherit;
+background:rgba(0,0,0,0.2);
+padding:40px 20px 40px 20px;
+margin: 150px 250px 20px 350px;	
+box-shadow: 0px 0px 15px #000;
+
+}
+.inputBox{
+width:200%;
+padding: 10px 0px 10px 5px;
+margin: 10px 0px 10px 0px;
+border-radius:4px;
+font-family:Sans-serif, Optima;
+font-size: 20px;
+}
+</style>
+</head>
+<body id="body" onload="color();">
+<div ng-app="" ng-controller="tempCtrl" id="content">
+<table>
+ <tr>
+    <td>Celsius:</td>
+	<td>
+	<input type="number" class="inputBox" ng-model="celsius" ng-change="fahrenheitConverter()">
+	</td>
+	</tr>
+	<tr>
+	<td>Fahrenheit: </td>
+	<td>
+	<input type="number" class="inputBox" ng-model="fahrenheit" ng-change="celsiusConverter()">
+	</td>
+	</tr>
+	</table>
+</div>
+</body>
+
+
+
+
+
+</html>
